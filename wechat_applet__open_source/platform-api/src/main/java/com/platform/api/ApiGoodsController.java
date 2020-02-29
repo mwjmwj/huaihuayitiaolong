@@ -642,7 +642,7 @@ public class ApiGoodsController extends ApiBaseAction {
         ApiPageUtils goodsData = new ApiPageUtils(new PageInfo(goodsList));
         //搜索到的商品
         for (CategoryVo categoryEntity : filterCategory) {
-            if (null != categoryId && categoryEntity.getId() == 0 || categoryEntity.getId() == categoryId) {
+            if (null != categoryId && categoryEntity.getId() == 0 || categoryEntity.getId().equals(categoryId) ) {
                 categoryEntity.setChecked(true);
             } else {
                 categoryEntity.setChecked(false);

@@ -17,6 +17,10 @@ Page({
     hotKeyword: [],
     page: 1,
     size: 20,
+    loadmoreText: '正在加载更多数据',
+    nomoreText: '全部加载完成',
+    nomore: false,
+    totalPages: 1,
     currentSortType: 'id',
     currentSortOrder: 'desc',
     categoryId: 0
@@ -89,15 +93,25 @@ Page({
   },
   getGoodsList: function () {
     let that = this;
+
+    if (that.data.totalPages <= that.data.page-1) {
+      that.setData({
+        nomore: true
+      })
+      return;
+    }
+
     util.request(api.GoodsList, { keyword: that.data.keyword, page: that.data.page, size: that.data.size, sort: that.data.currentSortType, order: that.data.currentSortOrder, categoryId: that.data.categoryId }).then(function (res) {
+      console.log(res);
       if (res.errno === 0) {
         that.setData({
           searchStatus: true,
           categoryFilter: false,
-          goodsList: res.data.goodsList,
+          goodsList: that.data.goodsList.concat(res.data.goodsList),
           filterCategory: res.data.filterCategory,
-          page: res.data.currentPage,
-          size: res.data.numsPerPage
+          page: res.data.currentPage + 1,
+          size: res.data.numsPerPage,
+          totalPages: res.data.totalPages
         });
       }
 
@@ -173,7 +187,9 @@ Page({
     });
     this.getGoodsList();
   },
-  onKeywordConfirm(event) {
-    this.getSearchResult(event.detail.value);
-  }
+  //上拉加载方法
+  onReachBottom(){
+    console.log("load...");
+    this.getGoodsList();
+  },
 })
