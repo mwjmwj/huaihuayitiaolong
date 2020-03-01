@@ -50,8 +50,8 @@
 		<view class="cate-item">
 			<view class="b">
 				<navigator class="item" url="/pages/goods/goods?id={{iitem.id}}" wx:for="{{goodsList}}" wx:for-item="iitem" wx:for-index="iindex">
-					<!-- <image class="img" src="{{iitem.list_pic_url}}" background-size="cover"></image> -->
-					<image class="img" src="https://profile.csdnimg.cn/4/E/9/3_chuqing1815" background-size="cover"></image>
+					<!-- <image class="img" src="https://profile.csdnimg.cn/4/E/9/3_chuqing1815" background-size="cover"></image> -->
+					<image class="img" src="{{iitem.list_pic_url}}" background-size="cover"></image>
 					<view class="vtxt">
 						<view class="name">{{iitem.name}}</view>
 						<!-- <view class="name">清新趣粉全棉四件套 条纹绿格清新趣粉全棉四件套 条纹绿格清新趣粉全棉四件套 条纹绿格</view> -->

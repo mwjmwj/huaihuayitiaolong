@@ -16,7 +16,7 @@ Page({
     defaultKeyword: {},
     hotKeyword: [],
     page: 1,
-    size: 20,
+    size: 10,
     loadmoreText: '正在加载更多数据',
     nomoreText: '全部加载完成',
     nomore: false,
@@ -94,20 +94,12 @@ Page({
   getGoodsList: function () {
     let that = this;
 
-    if (that.data.totalPages <= that.data.page-1) {
-      that.setData({
-        nomore: true
-      })
-      return;
-    }
-
     util.request(api.GoodsList, { keyword: that.data.keyword, page: that.data.page, size: that.data.size, sort: that.data.currentSortType, order: that.data.currentSortOrder, categoryId: that.data.categoryId }).then(function (res) {
-      console.log(res);
       if (res.errno === 0) {
         that.setData({
           searchStatus: true,
           categoryFilter: false,
-          goodsList: that.data.goodsList.concat(res.data.goodsList),
+          goodsList: res.data.goodsList,
           filterCategory: res.data.filterCategory,
           page: res.data.currentPage + 1,
           size: res.data.numsPerPage,
@@ -127,7 +119,8 @@ Page({
   getSearchResult(keyword) {
     this.setData({
       keyword: keyword,
-      page: 1,
+      "page": 1,
+      "totalPages": 1,
       categoryId: 0,
       goodsList: []
     });
@@ -140,7 +133,9 @@ Page({
       case 'categoryFilter':
         this.setData({
           'categoryFilter': !this.data.categoryFilter,
-          'currentSortOrder': 'asc'
+          'currentSortOrder': 'asc',
+          "page": 1,
+          "totalPages": 1
         });
         break;
       case 'priceSort':
@@ -148,20 +143,42 @@ Page({
         if (this.data.currentSortOrder == 'asc') {
           tmpSortOrder = 'desc';
         }
-        this.setData({
-          'currentSortType': 'price',
-          'currentSortOrder': tmpSortOrder,
-          'categoryFilter': false
-        });
-
-        this.getGoodsList();
+        
+        //如果根据当前条件数据全部查询出来了,之后根据价格排序就不需要访问后台了
+        if(this.data.totalPages <= this.data.page-1 && this.data.currentSortType == "price"){
+          let goodsList = this.data.goodsList;
+          if(tmpSortOrder == 'asc'){
+            //升序
+            goodsList = goodsList.sort((a,b)=> a.retail_price - b.retail_price);
+          }else{//降序
+            goodsList = goodsList.sort((a,b)=> b.retail_price - a.retail_price);
+          }
+          this.setData({
+            nomore: true,
+            'currentSortOrder': tmpSortOrder,
+            goodsList:goodsList
+          })
+          break;
+        }else{
+          this.setData({
+            'currentSortType': 'price',
+            'currentSortOrder': tmpSortOrder,
+            'categoryFilter': false,
+            "page": 1,
+            "totalPages": 1
+          });
+          this.getGoodsList();
+        }
+        
         break;
       default:
         //综合排序
         this.setData({
           'currentSortType': 'default',
           'currentSortOrder': 'desc',
-          'categoryFilter': false
+          'categoryFilter': false,
+          "page": 1,
+          "totalPages": 1
         });
         this.getGoodsList();
     }
@@ -183,13 +200,43 @@ Page({
       'categoryFilter': false,
       categoryId: currentCategory.id,
       page: 1,
-      goodsList: []
+      goodsList: [],
+      totalPages: 1
     });
     this.getGoodsList();
   },
+  onKeywordConfirm(event) {
+    this.getSearchResult(event.detail.value);
+  },
+  upGetGoodsList: function () {
+    let that = this;
+
+    if (that.data.totalPages <= that.data.page-1) {
+      that.setData({
+        nomore: true
+      })
+      return;
+    }
+
+    util.request(api.GoodsList, { keyword: that.data.keyword, page: that.data.page, size: that.data.size, sort: that.data.currentSortType, order: that.data.currentSortOrder, categoryId: that.data.categoryId }).then(function (res) {
+      if (res.errno === 0) {
+        that.setData({
+          searchStatus: true,
+          categoryFilter: false,
+          goodsList: that.data.goodsList.concat(res.data.goodsList),//追加数据
+          filterCategory: res.data.filterCategory,
+          page: res.data.currentPage + 1,
+          size: res.data.numsPerPage,
+          totalPages: res.data.totalPages
+        });
+      }
+
+      //重新获取关键词
+      that.getSearchKeyword();
+    });
+  },
   //上拉加载方法
   onReachBottom(){
-    console.log("load...");
-    this.getGoodsList();
-  },
+    this.upGetGoodsList();
+  }
 })
