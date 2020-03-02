@@ -304,6 +304,7 @@ page {
     font-size: 30rpx;
     color: #333;
     margin-top: 50rpx;
+    text-align: start;
 }
 
 .cate-item .item .price {
