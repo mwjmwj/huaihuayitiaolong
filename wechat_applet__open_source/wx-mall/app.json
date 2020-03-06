@@ -1,6 +1,8 @@
 {
   "pages": [
+    
     "pages/index/index",
+    "pages/search/search",
     "pages/catalog/catalog",
     "pages/newGoods/newGoods",
     "pages/hotGoods/hotGoods",
@@ -25,7 +27,6 @@
     "pages/topicComment/topicComment",
     "pages/brand/brand",
     "pages/brandDetail/brandDetail",
-    "pages/search/search",
     "pages/category/category",
     "pages/cart/cart",
     "pages/shopping/checkout/checkout",
@@ -49,6 +50,10 @@
     "navigationBarTitleText": "51商城",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
+    
+  },
+  "usingComponents": {
+    "navBar": "/components/navBar/navBar"
   },
   "tabBar": {
     "backgroundColor": "#fafafa",

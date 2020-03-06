@@ -1,6 +1,5 @@
 {
-  "navigationBarTitleText": "首页",
-  "usingComponents": {
-    "index-type-data": "../../component/index-type-data/index-type-data"
-  }
+  "navigationBarTitleText": "商城首页",
+  "enablePullDownRefresh": true
+  ,"navigationStyle": "custom"
 }
