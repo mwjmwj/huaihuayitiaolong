@@ -1,9 +1,8 @@
-var api = require('../../api.js');
+
 var app = getApp();
 var share_count = 0;
 Page({
     data: {
-        imgServer: api.default.img_server,
         x: wx.getSystemInfoSync().windowWidth,
         y: wx.getSystemInfoSync().windowHeight,
         background: 'rgba(0,0,0,0)',
@@ -77,7 +76,7 @@ Page({
         page.setData(str.data);
         return;
         app.request({
-            url: api.default.index,
+            url: 'api.default.index', //请求首页数据
             success: function (res) {
                 if (res.code == 200) {
                     page.setData(res.data);
@@ -145,7 +144,7 @@ Page({
             };
         }
         app.request({
-            url: api.coupon.receive,
+            url: '', 
             data: {
                 id: id
             },
@@ -228,7 +227,8 @@ Page({
     },
     toSearch: function(){
         wx.navigateTo({
-            url: '/pages/search/search'
+            //url: '/pages/search/search'
+            url: '/pages/index1/index'
           });
     }
 

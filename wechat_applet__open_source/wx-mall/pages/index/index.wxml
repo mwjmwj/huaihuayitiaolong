@@ -5,15 +5,15 @@
 		</view>
 		<view class='lxy-nav-bar-search' slot="center" bindtap="toSearch">
 			<view class='lxy-nav-bar-search__icon' />
-			<view class='lxy-nav-bar-search__input' >点击搜索</view>
+			<view class='lxy-nav-bar-search__input'>点击搜索</view>
 		</view>
 	</navBar>
 	<view class='main11'>
 		<block wx:for="{{module_list}}" wx:for-item="item" wx:key="item.id" wx:for-index="index">
 
 			<!-- Banner 开始 -->
-			<view wx:if="{{item.title=='banner'}}">
-				<swiper class="banner" autoplay="true" interval="5000" duration="300" indicator-dots="true" circular="true">
+			<view wx:if="{{item.title=='banner'}}" class="nav-v">
+				<swiper class="banner" autoplay="true" interval="5000" duration="300" circular="true">
 					<block wx:for="{{banner_list}}" wx:key="item.id">
 						<swiper-item>
 							<navigator url="{{item.url}}">
@@ -23,22 +23,11 @@
 						</swiper-item>
 					</block>
 				</swiper>
+				<image src="../../static/images/background1.png" class="nav-img"></image>
 			</view>
 			<!-- Banner 结束 -->
-
-			<!-- 搜索栏 开始 -->
-			<!-- <view wx:elif="{{item.title=='search'}}">
-				<view class="search-block">
-					<navigator url="/pages/search/search">
-						<image src="/images/icon-search.png" />
-						<text>搜索</text>
-					</navigator>
-				</view>
-			</view> -->
-			<!-- 搜索栏 结束 -->
-
 			<!-- 导航图标 开始 -->
-			<view wx:elif="{{item.title=='nav'}}">
+			<view wx:elif="{{item.title=='nav'}}" class="c1">
 				<view class="nav-icon-list flex-row" wx:if="{{nav_icon_list&&nav_icon_list.length>0}}">
 					<view class="flex-grow-0 nav-icon" wx:for="{{nav_icon_list}}" wx:key="item.id">
 						<navigator bindtap="navigatorClick" data-url="{{item.summary}}" data-open_type="{{item.content}}" url="{{item.summary}}" open-type="{{item.content}}">
@@ -55,7 +44,7 @@
 				<navigator class="topic-bar" url="/pages/topic-list/topic-list">
 					<view class="flex-row">
 						<view class="flex-grow-0 flex-y-center">
-							<image class="bar-icon" src="/images/icon-topic.png"></image>
+							<image class="bar-icon" src="../../static/images/icon-topic.png"></image>
 						</view>
 						<view class="flex-grow-1">
 							<view wx:for="{{subjectList}}" wx:key="item.id" wx:if="{{index < 4}}" class="flex-row">
@@ -81,7 +70,7 @@
 						</view>
 						<navigator class="flex-y-center" bindtap="hideGetCoupon" url="/pages/coupon-list/coupon-list">
 							<text>更多</text>
-							<image src="/images/icon-jiantou-r.png" />
+							<image src="../../static/images/icon-jiantou-r.png" />
 						</navigator>
 					</view>
 					<scroll-view scroll-x="true" style="height: 162rpx">
@@ -124,15 +113,15 @@
 				<block wx:for="{{cat_list}}" wx:for-index="cat_index" wx:for-item="cat" wx:key="item.id">
 					<view wx:if="{{cat.goodsList.length>0}}" style="background: #fff;margin-bottom: 10rpx;width:100%;overflow-x: hidden;">
 						<view class="title-bar flex-y-center flex-x-center">
-							<view class="title-line"></view>
+							<!-- <view class="title-line"></view> -->
 							<view class="title flex-y-center">
 								<image src="" mode="aspectFill"></image>
 								<text>{{cat.name}}</text>
 							</view>
-							<view class="title-line"></view>
+							<!-- <view class="title-line"></view> -->
 							<navigator class="flex-y-center" bindtap="hideGetCoupon" url="/pages/list/list?cat_id={{cat.id}}">
 								<text>更多</text>
-								<image src="/images/icon-jiantou-r.png" />
+								<image src="../../static/images/icon-jiantou-r.png" />
 							</navigator>
 						</view>
 						<view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
@@ -155,15 +144,15 @@
 					<block wx:if="{{item.cat_id==cat.id}}">
 						<view wx:if="{{cat.goods_list.length>0}}" style="background: #fff;margin-bottom: 10rpx;width:100%;overflow-x: hidden;">
 							<view class="title-bar flex-y-center flex-x-center">
-								<view class="title-line"></view>
+								<!-- <view class="title-line"></view> -->
 								<view class="title flex-y-center">
 									<image src="{{cat.pic_url}}" mode="aspectFill"></image>
 									<text>{{cat.name}}</text>
 								</view>
-								<view class="title-line"></view>
+								<!-- <view class="title-line"></view> -->
 								<navigator class="flex-y-center" bindtap="hideGetCoupon" url="/pages/list/list?cat_id={{cat.id}}">
 									<text>更多</text>
-									<image src="/images/icon-jiantou-r.png" />
+									<image src="../../static/images/icon-jiantou-r.png" />
 								</navigator>
 							</view>
 							<view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
@@ -183,7 +172,7 @@
 
 
 			<!-- 自定义板块 开始 -->
-			<view wx:else>
+			<view wx:elif="{{block_list != null }}" class="c2">
 				<block wx:for="{{block_list}}" wx:key="item.id" wx:for-item="block" wx:if="{{item.block_id==block.id}}">
 
 					<block wx:if="{{block.data.pic_list.length==1}}">
