@@ -42,8 +42,7 @@
     "pages/customer/auth/auth",
     "pages/customer/zcuslist/zcuslist",
     "pages/spike/spike",
-    "pages/group/group",
-    "pages/index1/index"
+    "pages/group/group"
   ],
   "window": {
     "backgroundTextStyle": "dark",

@@ -227,8 +227,7 @@ Page({
     },
     toSearch: function(){
         wx.navigateTo({
-            //url: '/pages/search/search'
-            url: '/pages/index1/index'
+            url: '/pages/search/search'
           });
     }
 
