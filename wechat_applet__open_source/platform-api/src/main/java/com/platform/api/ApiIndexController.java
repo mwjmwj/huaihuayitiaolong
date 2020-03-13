@@ -382,4 +382,17 @@ public class ApiIndexController extends ApiBaseAction {
         resultObj = lifeServiceSer.idcardCheck(idcard, realname, userId);
         return toResponsObject(Integer.parseInt(resultObj.get("errno").toString()), resultObj.get("errmsg").toString(), null);
     }
+
+    /**
+     * 获取首页分类商品
+     * @return
+     */
+    @ApiOperation(value = "getCategoryGoods")
+    @IgnoreAuth
+    @GetMapping(value = "getCategoryGoods")
+    public Object getCategoryGoods() {
+        List<CategoryGoodsVo> categoryGoods = goodsService.getCategoryGoods();
+
+        return toResponsSuccess(categoryGoods);
+    }
 }

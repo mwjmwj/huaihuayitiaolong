@@ -1,5 +1,6 @@
 package com.platform.dao;
 
+import com.platform.entity.CategoryGoodsVo;
 import com.platform.entity.GoodsVo;
 import com.platform.utils.Query;
 
@@ -30,4 +31,6 @@ public interface ApiGoodsMapper extends BaseDao<GoodsVo> {
     int queryKillTotal(Query query);
 
     List<GoodsVo> queryKillPage(Query query);
+
+    List<CategoryGoodsVo> getCategoryGoods();
 }

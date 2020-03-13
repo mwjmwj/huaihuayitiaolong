@@ -25,6 +25,7 @@ module.exports = {
     GoodsNew: NewApiRootUrl + 'goods/new',  //新品
     GoodsHot: NewApiRootUrl + 'goods/hot',  //热门
     GoodsRelated: NewApiRootUrl + 'goods/related',  //商品详情页的关联商品（大家都在看）
+    getCategoryGoods: NewApiRootUrl + 'index/getCategoryGoods',  //商品详情页的关联商品（大家都在看）
 
     BrandList: NewApiRootUrl + 'brand/list',  //品牌列表
     BrandDetail: NewApiRootUrl + 'brand/detail',  //品牌详情

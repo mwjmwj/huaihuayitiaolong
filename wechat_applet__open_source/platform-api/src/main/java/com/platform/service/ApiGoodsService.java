@@ -1,6 +1,7 @@
 package com.platform.service;
 
 import com.platform.dao.ApiGoodsMapper;
+import com.platform.entity.CategoryGoodsVo;
 import com.platform.entity.GoodsVo;
 import com.platform.entity.MlsUserEntity2;
 import com.platform.utils.Query;
@@ -100,5 +101,9 @@ public class ApiGoodsService {
 
     public List<GoodsVo> queryKillPage(Query query) {
         return goodsDao.queryKillPage(query);
+    }
+
+    public List<CategoryGoodsVo> getCategoryGoods() {
+        return goodsDao.getCategoryGoods();
     }
 }

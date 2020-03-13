@@ -596,7 +596,7 @@ public class ApiGoodsController extends ApiBaseAction {
         List<GoodsVo> categoryEntityList = goodsService.queryList(params);
         params.remove("fields");
         if (null != categoryEntityList && categoryEntityList.size() > 0) {
-            List<Integer> categoryIds = new ArrayList();
+            List<Integer> categoryIds = new ArrayList(); //这里可以用set集合去重
             for (GoodsVo goodsVo : categoryEntityList) {
                 categoryIds.add(goodsVo.getCategory_id());
             }
