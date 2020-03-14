@@ -13,15 +13,15 @@ Page({
         banner: [],
         "nav_icon_list": [{
                 "id": null,
-                "title": "我的公告",
-                "summary": "/pages/topic-list/topic-list",
+                "title": "我的足迹",
+                "summary": "/pages/ucenter/footprint/footprint",
                 "releasedate": null,
                 "clickhit": null,
                 "replyhit": null,
                 "content": "navigate",
                 "keyword": null,
                 "state": null,
-                "img": "http://www.91weiyi.xyz/addons/zjhj_mall/core/web/uploads/image/86/863a7db352a936743faf8edd5162bb5c.png",
+                "img": "../../static/images/zuji.png",
                 "villageid": null,
                 "username": null
             },
@@ -84,7 +84,7 @@ Page({
             {
                 "id": null,
                 "title": "优惠劵",
-                "summary": "/pages/coupon/coupon?status=0",
+                "summary": "/pages/ucenter/coupon/coupon",
                 "releasedate": null,
                 "clickhit": null,
                 "replyhit": null,
@@ -98,7 +98,7 @@ Page({
             {
                 "id": null,
                 "title": "我的收藏",
-                "summary": "/pages/favorite/favorite",
+                "summary": "/pages/ucenter/collect/collect",
                 "releasedate": null,
                 "clickhit": null,
                 "replyhit": null,
@@ -112,7 +112,7 @@ Page({
             {
                 "id": null,
                 "title": "售后订单",
-                "summary": "/pages/order/order?status=4",
+                "summary": "/pages/ucenter/return/return?id=201",
                 "releasedate": null,
                 "clickhit": null,
                 "replyhit": null,
