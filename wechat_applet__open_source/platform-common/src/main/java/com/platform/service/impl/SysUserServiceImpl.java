@@ -141,4 +141,16 @@ public class SysUserServiceImpl implements SysUserService {
         sysUserDao.queryListByBean(userWindowDto);
         return PageHelper.endPage();
     }
+
+    /**
+     * 重置密码为: 888888
+     * @param userId
+     */
+    @Override
+    @Transactional
+    public void resetPass(Long userId) {
+        SysUserEntity user = sysUserDao.queryObject(userId);
+        user.setPassword(new Sha256Hash("888888").toHex());
+        sysUserDao.update(user);
+    }
 }

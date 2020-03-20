@@ -193,4 +193,14 @@ public class SysUserController extends AbstractController {
 
         return R.ok();
     }
+
+    /**
+     * 重置密码
+     */
+    @RequestMapping("/resetPass/{userId}")
+    @RequiresPermissions("sys:user:update")
+    public R resetPass(@PathVariable("userId") Long userId) {
+        sysUserService.resetPass(userId);
+        return R.ok();
+    }
 }

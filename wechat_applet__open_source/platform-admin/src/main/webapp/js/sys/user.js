@@ -117,6 +117,32 @@ var vm = new Vue({
             });
 
         },
+        resetePass: function () {
+            var userId = getSelectedRow("#jqGrid");
+            if (userId == null) {
+                return;
+            }
+            var data = getSelectedRowData("#jqGrid");
+            confirm('确定要重置登录名: ' + data.username + '的密码为: 888888?', function () {
+                dialogLoading(true);
+                Ajax.request({
+                    url: "../sys/user/resetPass/" + userId,
+                    async: true,
+                    type: 'POST',
+                    successCallback: function (r) {
+                        dialogLoading(false);
+                        if(r.code == 0){
+                            alert("重置密码成功");
+                        }
+                    },
+                    errback: function (e) {
+                        dialogLoading(false);
+                        alert("重置密码失败!");
+                    }
+                });
+            });
+
+        },
         del: function () {
             var userIds = getSelectedRows("#jqGrid");
             if (userIds == null) {
