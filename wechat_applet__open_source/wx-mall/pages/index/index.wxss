@@ -4,20 +4,18 @@
 }
 
 .main11 {
-  position: absolute;
   top: 0;
   width: 100%;
   height: auto;
   background-color: white;
 }
 .lxy-nav-bar-search{
-  background-color: black;
-  opacity: 0.5;
+  background-color: #f4f4f4;
 }
 
 .lxy-nav-bar-search__input{
   text-align: start;
-  color: white;
+  color: #8a8282;
 }
 .con{
   color: black;
@@ -278,6 +276,7 @@
   width: 48%;
   padding-left: 1%;
   padding-right: 1%;
+  
 }
 
 .goods-list {
@@ -483,6 +482,7 @@
   -webkit-box-orient: horizontal;
   -webkit-flex-direction: row;
   flex-direction: row;
+  border-bottom: #f4f4f4 solid 20rpx;
 }
 
 .flex-grow-0 {
@@ -528,4 +528,189 @@
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+/** 新增样式 */
+.flashSale_mian{
+  position: relative;
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 20rpx;
+  border: #d6d2d2 solid 1rpx;
+  border-radius: 30rpx;
+  
+  /* border-bottom-right-radius: 30rpx;
+  border-bottom-left-radius: 30rpx; */
+}
+
+.flashSale_mian_img{
+  border-top-right-radius: 30rpx;
+  border-top-left-radius: 30rpx;
+}
+
+.flashSale_mian_info{
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+}
+
+.flashSale_show_img{
+  position: relative;
+  margin: 3% 3% 0 3%;
+}
+.flashSale_show_img image:first-child{
+  width: 100%;
+}
+
+.flashSale_show_img view{
+  position: absolute;
+  left: 10%;
+  bottom: 10%;
+  width: 33%;
+  background-color: red;
+  border-radius: 25rpx;
+  text-align: center;
+  color: white;
+}
+.team-content {
+  width: 97%;
+  display:-webkit-box;
+  -webkit-line-clamp:1;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  -webkit-box-orient:vertical;
+  word-break:break-all;
+  text-align: left;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.flashSale-bottoom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 3% 3% 5% 3%;
+}
+
+.flashSale-bottoom-price{
+  display: flex;
+  flex-direction: column;
+}
+.flashSale-bottoom-price text:first-child{
+  font-weight: bold ;
+  font-size: 40rpx;
+}
+
+.flashSale-bottoom-price text:last-child{
+  text-decoration:line-through;
+  color: #d6d2d2;
+}
+
+.flashSale-bottoom-qf{
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  align-items: center;
+}
+
+.flashSale-bottoom-qf view{
+  margin-left: 3%;
+  margin-right: 3%;
+  padding: 1%;
+}
+
+.flashSale-bottoom-qf view:first-child{
+  background-color: red;
+  width: 700rpx;
+  border-radius: 25rpx;
+  text-align: center;
+  color: white;
+}
+
+.flashSale-bottoom-qf view:last-child{
+  width: 500rpx;
+  border: red solid 1px;
+  border-radius: 25rpx;
+  text-align: center;
+  color: red;
+}
+
+.bottom-gd{
+  display: flex;
+  justify-content: center; /*元素水平居中*/
+  text-align: center; /*文字水平居中*/
+  align-items: center; /*垂直居中*/
+}
+.bottom-gd view:first-child{
+  width: 300rpx;
+  padding: 2%;
+  margin: 3%;
+  background-color: red;
+  border-radius: 35rpx;
+  color: white;
+}
+
+.select_mall{
+  display: flex;
+  padding: 5%;
+  border-top: #f4f4f4 solid 20rpx;
+  margin-bottom: 20rpx;
+  align-items: center;
+  box-shadow: 0rpx 10rpx 10rpx #d6d5d5;
+}
+
+.select_mall image:first-child{
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.select_mall_text{
+  font-size: 60rpx;
+  height: 80rpx;
+}
+
+.jx_main{
+  margin-left: 5%;
+  margin-right: 5%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.jx_main_pro{
+  width: 48%;
+  border: #d6d2d2 solid 1rpx;
+  border-radius: 15rpx;
+  /* border-bottom-right-radius: 15rpx;
+  border-bottom-left-radius: 15rpx; */
+  margin-bottom: 2%;
+}
+
+.jx_main_pro image:first-child{
+  margin-bottom: 0;
+  vertical-align:bottom;
+  vertical-align: top;
+  border-top-right-radius: 15rpx;
+  border-top-left-radius: 15rpx;
+}
+
+.jx_main_pro_jj{
+  background-color: red;
+  margin-top: 0;
+  vertical-align: top;
+}
+
+.jx_main_pro_xq{
+  overflow:hidden; 
+text-overflow:ellipsis;
+display:-webkit-box; 
+-webkit-box-orient:vertical;
+-webkit-line-clamp:2; 
+margin: 3% 3% 0 3%;
+}
+
+.jx_main_pro_jg{
+  margin: 0 3% 0 3%;
 }

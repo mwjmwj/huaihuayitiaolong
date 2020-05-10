@@ -11,6 +11,15 @@ Page({
         colorCss: "",
         categoryGoods: {},
         banner: [],
+        xsList:[1,2],
+        msTime: '23:59',
+        countdown: '',
+        countdownFlag: true,
+        day:0,
+        hou:0,
+        min:0,
+        sec:0,
+        proList:[1,2,3,4],
         "nav_icon_list": [{
                 "id": null,
                 "title": "我的足迹",
@@ -22,34 +31,6 @@ Page({
                 "keyword": null,
                 "state": null,
                 "img": "../../static/images/zuji.png",
-                "villageid": null,
-                "username": null
-            },
-            {
-                "id": null,
-                "title": "商品分类",
-                "summary": "/pages/catalog/catalog",
-                "releasedate": null,
-                "clickhit": null,
-                "replyhit": null,
-                "content": "switchTab",
-                "keyword": null,
-                "state": null,
-                "img": "http://www.91weiyi.xyz/addons/zjhj_mall/core/web/uploads/image/35/3570994c06e61b1f0cf719bdb52a0053.png",
-                "villageid": null,
-                "username": null
-            },
-            {
-                "id": null,
-                "title": "购物车",
-                "summary": "/pages/cart/cart",
-                "releasedate": null,
-                "clickhit": null,
-                "replyhit": null,
-                "content": "switchTab",
-                "keyword": null,
-                "state": null,
-                "img": "http://www.91weiyi.xyz/addons/zjhj_mall/core/web/uploads/image/c2/c2b01cf78f79cbfba192d5896eeaecbe.png",
                 "villageid": null,
                 "username": null
             },
@@ -69,20 +50,6 @@ Page({
             },
             {
                 "id": null,
-                "title": "用户中心",
-                "summary": "/pages/ucenter/index/index",
-                "releasedate": null,
-                "clickhit": null,
-                "replyhit": null,
-                "content": "switchTab",
-                "keyword": null,
-                "state": null,
-                "img": "http://www.91weiyi.xyz/addons/zjhj_mall/core/web/uploads/image/46/46eabbff1e7dc5e416567fc45d4d5df3.png",
-                "villageid": null,
-                "username": null
-            },
-            {
-                "id": null,
                 "title": "优惠劵",
                 "summary": "/pages/ucenter/coupon/coupon",
                 "releasedate": null,
@@ -92,20 +59,6 @@ Page({
                 "keyword": null,
                 "state": null,
                 "img": "http://www.91weiyi.xyz/addons/zjhj_mall/core/web/uploads/image/13/13312a6d56c202330f8c282d8cf84ada.png",
-                "villageid": null,
-                "username": null
-            },
-            {
-                "id": null,
-                "title": "我的收藏",
-                "summary": "/pages/ucenter/collect/collect",
-                "releasedate": null,
-                "clickhit": null,
-                "replyhit": null,
-                "content": "navigate",
-                "keyword": null,
-                "state": null,
-                "img": "http://www.91weiyi.xyz/addons/zjhj_mall/core/web/uploads/image/ca/cab6d8d4785e43bd46dcbb52ddf66f61.png",
                 "villageid": null,
                 "username": null
             },
@@ -138,6 +91,7 @@ Page({
         //     app.login();
         console.log('login-token:' + access_token);
         this.loadData(options);
+        
     },
 
     /**
@@ -159,6 +113,7 @@ Page({
                 });
             }
         });
+        this.countDownFun();
     },
 
     /**
@@ -208,6 +163,50 @@ Page({
         wx.navigateTo({
             url: '/pages/search/search'
         });
+    },
+    // 倒计时
+  countDownFun:function(){
+    var that=this;
+    var nowTime = new Date();//现在时间（时间戳）
+    var dateStr = nowTime.getFullYear()+"-" + (nowTime.getMonth() + 1) + "-" + nowTime.getDate() + " " + this.data.msTime;
+    var endTime = new Date(dateStr);//结束时间（时间戳）
+
+    var time = (endTime-nowTime)/1000;//距离结束的毫秒数
+    // 获取天、时、分、秒
+    let day = parseInt(time / (60 * 60 * 24));
+    let hou = parseInt(time % (60 * 60 * 24) / 3600);
+    let min = parseInt(time % (60 * 60 * 24) % 3600 / 60);
+    let sec = parseInt(time % (60 * 60 * 24) % 3600 % 60);
+    // console.log(day + "," + hou + "," + min + "," + sec)
+    day = that.timeFormin(day),
+    hou = that.timeFormin(hou),
+    min = that.timeFormin(min),
+    sec = that.timeFormin(sec)
+    that.setData({
+      day: that.timeFormat(day),
+      hou: that.timeFormat(hou),
+      min: that.timeFormat(min),
+      sec: that.timeFormat(sec)
+    })
+    // 每1000ms刷新一次
+    if (time>0){
+      that.setData({
+        countdownFlag: true
+      })
+      setTimeout(this.countDownFun, 1000);
+    }else{
+      that.setData({
+        countdownFlag:false
+      })
     }
+  },
+  //小于10的格式化函数（2变成02）
+  timeFormat(param) {
+    return param < 10 ? '0' + param : param;
+  },
+  //小于0的格式化函数（不会出现负数）
+  timeFormin(param) {
+    return param < 0 ? 0: param;
+  }
 
 });
