@@ -1,14 +1,51 @@
 /* pages/spike/spike.wxss */
-page{
-		background: #F5F5F5;
+
+	.content .top{
+		position: fixed;
+		top: 0;
+		width: 100%;
+		background-color: white;
+		z-index: 1000;
 	}
-	.content {
+
+	.spike_time{
+		background-color: rgb(253, 40, 71);
 		display: flex;
-		width: 750rpx;
-		flex-direction: column;
-		align-items: center;
-		background: #F5F5F5;
+		width: 98%;
+		margin: 10rpx;
 	}
+
+	.spike_time_show{
+		display: flex;
+		flex-direction: column;
+		margin: 20rpx;
+		color: white;
+	}
+
+	.spike_time_show text:first-child{
+		font-size: 50rpx;
+		font-weight: bold;
+	}
+
+	.spike_time_show text:last-child{
+		font-size: 30rpx;
+		text-align: center;
+	}
+
+	.spike_date{
+		background-color: white;
+		width: 100%;
+		align-items: center;
+		text-align: center;
+		justify-content: center;
+		box-shadow: 0rpx 10rpx 10rpx #d6d5d5;
+	}
+
+	.spike_date_info{
+		padding: 2% 10% 2% 10%;
+		font-size: 50rpx;
+	}
+
 	.goods .goodinfo{
 		width: 750rpx;
 		height: 300rpx;

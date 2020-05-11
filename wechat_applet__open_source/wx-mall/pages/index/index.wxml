@@ -48,13 +48,15 @@
 			</view>
 			<view style="border-bottom: #d6d2d2 solid 1rpx;"  wx:for="{{xsList}}" wx:key="*this">
 				<!--商品展示-->
-				<view class="flashSale_show_img">
-					<!--背景图片/相对定位一个按钮-->
-					<image src="./images/product1.jpg"></image>
-					<!-- <view>
-						立即抢购>>
-					</view> -->
-				</view>
+				<navigator  url="/pages/goods/goods?id={{index}}">
+					<view class="flashSale_show_img">
+						<!--背景图片/相对定位一个按钮-->
+						<image src="./images/product1.jpg"></image>
+						<!-- <view>
+							立即抢购>>
+						</view> -->
+					</view>
+				</navigator>
 				<!--描述-->
 				<view class="team-content">
 						限量500组限量500组限量500组限量500组限量500组限量500组
@@ -74,7 +76,9 @@
 			
 			<!--查看更多-->
 			<view class="bottom-gd">
-				<view>查看更多</view>
+				<navigator  open-type="switchTab" url="/pages/spike/spike">
+					<view>查看更多</view>
+				</navigator>
 			</view>
 		</view>
 
@@ -90,22 +94,23 @@
 			<!--单个商品展示盒子宽度设置50%以下-->
 			<view class="jx_main_pro"   wx:for="{{proList}}" wx:key="*this">
 				<!--图片-->
-				
-				<image src="./images/product1.jpg" style="width:100%" mode="widthFix"></image>
-				<!--简介-->
-				<!-- <view class="jx_main_pro_jj">
-					简介
-				</view> -->
-				<!--详情-->
-				<view class="jx_main_pro_xq">
-						限量500组限量500组限量500组限量500组限量500组限量500组
-				</view>
-				<view class="jx_main_pro_jg">
-					<view class="flashSale-bottoom-price">
-						<text>￥9.9</text>
-						<text>￥99</text>
-				</view>
-				</view>
+				<navigator url="/pages/goods/goods?id={{index}}">
+					<image src="./images/product1.jpg" style="width:100%" mode="widthFix"></image>
+					<!--简介-->
+					<!-- <view class="jx_main_pro_jj">
+						简介
+					</view> -->
+					<!--详情-->
+					<view class="jx_main_pro_xq">
+							限量500组限量500组限量500组限量500组限量500组限量500组
+					</view>
+					<view class="jx_main_pro_jg">
+						<view class="flashSale-bottoom-price">
+							<text>￥9.9</text>
+							<text>￥99</text>
+					</view>
+					</view>
+				</navigator>
 			</view>
 		</view>
 

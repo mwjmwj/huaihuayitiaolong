@@ -568,7 +568,7 @@
   left: 10%;
   bottom: 10%;
   width: 33%;
-  background-color: red;
+  background-color: rgb(229, 43, 37);
   border-radius: 25rpx;
   text-align: center;
   color: white;
@@ -605,6 +605,7 @@
 .flashSale-bottoom-price text:last-child{
   text-decoration:line-through;
   color: #d6d2d2;
+  font-size: 27rpx;
 }
 
 .flashSale-bottoom-qf{
@@ -621,7 +622,7 @@
 }
 
 .flashSale-bottoom-qf view:first-child{
-  background-color: red;
+  background-color: rgb(229, 43, 37);
   width: 700rpx;
   border-radius: 25rpx;
   text-align: center;
@@ -630,10 +631,10 @@
 
 .flashSale-bottoom-qf view:last-child{
   width: 500rpx;
-  border: red solid 1px;
+  border: rgb(229, 43, 37) solid 1px;
   border-radius: 25rpx;
   text-align: center;
-  color: red;
+  color: rgb(229, 43, 37);
 }
 
 .bottom-gd{
@@ -641,12 +642,18 @@
   justify-content: center; /*元素水平居中*/
   text-align: center; /*文字水平居中*/
   align-items: center; /*垂直居中*/
+  
 }
-.bottom-gd view:first-child{
+
+.bottom-gd navigator:first-child{
+  box-shadow: 0rpx 10rpx 10rpx #b63636;
+}
+
+.bottom-gd navigator:first-child{
   width: 300rpx;
   padding: 2%;
   margin: 3%;
-  background-color: red;
+  background-color: rgb(229, 43, 37);
   border-radius: 35rpx;
   color: white;
 }
@@ -697,7 +704,7 @@
 }
 
 .jx_main_pro_jj{
-  background-color: red;
+  background-color: rgb(229, 43, 37);
   margin-top: 0;
   vertical-align: top;
 }
