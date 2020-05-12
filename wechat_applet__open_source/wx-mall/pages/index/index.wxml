@@ -25,7 +25,7 @@
 		</view>
 		<!-- Banner 结束 -->
 		<!-- 导航图标 开始 -->
-		<view class="nav-icon-list flex-row" >
+		<view class="nav-icon-list flex-row">
 			<view class="flex-grow-0 nav-icon" wx:for="{{nav_icon_list}}" wx:key="item.id">
 				<navigator bindtap="navigatorClick" data-url="{{item.summary}}" data-open_type="{{item.content}}" url="{{item.summary}}" open-type="{{item.content}}">
 					<image src="{{item.img}}"></image>
@@ -36,22 +36,22 @@
 		<!-- 导航图标 结束 -->
 
 		<!--限时抢购-->
-		<view class="flashSale_mian">
+		<view class="flashSale_mian" wx:if="{{skill.length > 0}}">
 			<!--图片-->
 			<image src="./images/top.png" style="width:100%;height:100rpx;" class="flashSale_mian_img"></image>
-			<view  class="flashSale_mian_info">
+			<!-- <view  class="flashSale_mian_info">
 				<text>{{hou}}</text>：<text>{{min}}</text>：<text>{{sec}}</text>
-			</view>
+			</view> -->
 			<!--时间段-->
-			<view style="margin-left: 3%;margin-right: 3%;">
+			<!-- <view style="margin-left: 3%;margin-right: 3%;">
 			<text>12:00 | 14:00 | </text>
-			</view>
-			<view style="border-bottom: #d6d2d2 solid 1rpx;"  wx:for="{{xsList}}" wx:key="*this">
+			</view> -->
+			<view style="border-bottom: #d6d2d2 solid 1rpx;" wx:for="{{skill}}" wx:key="*this">
 				<!--商品展示-->
-				<navigator  url="/pages/goods/goods?id={{index}}">
+				<navigator url="/pages/goods/goods?id={{item.id}}&type=2">
 					<view class="flashSale_show_img">
 						<!--背景图片/相对定位一个按钮-->
-						<image src="./images/product1.jpg"></image>
+						<image src="{{item.list_pic_url}}"></image>
 						<!-- <view>
 							立即抢购>>
 						</view> -->
@@ -59,24 +59,27 @@
 				</navigator>
 				<!--描述-->
 				<view class="team-content">
-						限量500组限量500组限量500组限量500组限量500组限量500组
+					{{item.promotion_desc}}
 				</view>
 				<!--价格/抢购/分享-->
 				<view class="flashSale-bottoom">
 					<view class="flashSale-bottoom-price">
-						<text>￥9.9</text>
-						<text>￥99</text>
+						<text>￥{{item.retail_price}}</text>
+						<text>￥{{item.market_price}}</text>
 					</view>
 					<view class="flashSale-bottoom-qf">
-						<view>去抢购 ></view>
-						<view>去分享</view>
+						<navigator url="/pages/goods/goods?id={{item.id}}&type=2">
+							<view>去抢购 ></view>
+						</navigator>
+						<!-- <button open-type="share" plain="true" >去分享</button> -->
+						<button open-type="share" class='icon_fx' data-index="{{index}}"></button>
 					</view>
 				</view>
 			</view>
-			
+
 			<!--查看更多-->
 			<view class="bottom-gd">
-				<navigator  open-type="switchTab" url="/pages/spike/spike">
+				<navigator open-type="switchTab" url="/pages/spike/spike">
 					<view>查看更多</view>
 				</navigator>
 			</view>
@@ -84,7 +87,7 @@
 
 		<!--精选专场-->
 		<view class="select_mall">
-		<image src="../../static/images/logo40.png"></image>
+			<image src="../../static/images/logo40.png"></image>
 			<view class="select_mall_text">
 				精选专场
 			</view>
@@ -92,25 +95,35 @@
 		<!--商品最外层盒子-->
 		<view class="jx_main">
 			<!--单个商品展示盒子宽度设置50%以下-->
-			<view class="jx_main_pro"   wx:for="{{proList}}" wx:key="*this">
+			<view class="jx_main_pro" wx:for="{{newGoods}}" wx:key="*this">
 				<!--图片-->
-				<navigator url="/pages/goods/goods?id={{index}}">
-					<image src="./images/product1.jpg" style="width:100%" mode="widthFix"></image>
+				<navigator url="/pages/goods/goods?id={{item.id}}">
+					<image src="{{item.list_pic_url}}" style="width:100%;height:auto;" mode="widthFix"></image>
 					<!--简介-->
 					<!-- <view class="jx_main_pro_jj">
 						简介
 					</view> -->
 					<!--详情-->
 					<view class="jx_main_pro_xq">
-							限量500组限量500组限量500组限量500组限量500组限量500组
+						{{item.goods_brief}}
 					</view>
 					<view class="jx_main_pro_jg">
 						<view class="flashSale-bottoom-price">
-							<text>￥9.9</text>
-							<text>￥99</text>
-					</view>
+							<text>￥{{item.retail_price}}</text>
+							<text>￥{{item.market_price}}</text>
+						</view>
 					</view>
 				</navigator>
+			</view>
+
+			<view wx:if="{{newGoods.length>4}}" class="loadmore">
+				<block wx:if="{{nomore}}">
+					<text>{{nomoreText}}</text>
+				</block>
+				<block wx:else>
+					<text class="iconfont icon-loading loading" space="nbsp"></text>
+					<text> {{loadmoreText}}</text>
+				</block>
 			</view>
 		</view>
 

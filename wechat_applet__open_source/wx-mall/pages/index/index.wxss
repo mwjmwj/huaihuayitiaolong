@@ -615,26 +615,28 @@
   align-items: center;
 }
 
-.flashSale-bottoom-qf view{
+.flashSale-bottoom-qf navigator{
   margin-left: 3%;
   margin-right: 3%;
   padding: 1%;
 }
 
-.flashSale-bottoom-qf view:first-child{
+.flashSale-bottoom-qf navigator:first-child{
   background-color: rgb(229, 43, 37);
-  width: 700rpx;
+  width: 500rpx;
   border-radius: 25rpx;
   text-align: center;
   color: white;
 }
 
-.flashSale-bottoom-qf view:last-child{
-  width: 500rpx;
-  border: rgb(229, 43, 37) solid 1px;
-  border-radius: 25rpx;
-  text-align: center;
-  color: rgb(229, 43, 37);
+.icon_fx{ 
+  float: right;
+  display: block;
+  height: 52.803rpx;
+  width: 52.803rpx; 
+  background: url(http://webcharpic.xfshequ.com/icon/icon_fx.png) 0 0 no-repeat;
+  background-size: 52.803rpx; 
+  margin-left: 5%;
 }
 
 .bottom-gd{
@@ -716,8 +718,33 @@ display:-webkit-box;
 -webkit-box-orient:vertical;
 -webkit-line-clamp:2; 
 margin: 3% 3% 0 3%;
+height: 80rpx;
 }
 
 .jx_main_pro_jg{
   margin: 0 3% 0 3%;
+}
+
+
+.loadmore {
+  height: 100rpx;
+  width: 100%;
+  line-height: 80rpx;
+  text-align: center;
+  margin-top: 0rpx;
+}
+
+.loadmore text {
+  color: #999;
+}
+@keyframes loading {
+  0% {transform: rotate(0deg)}
+  50% {transform: rotate(180deg)}
+  100% {transform: rotate(360deg)}
+}
+
+.loading {
+  display: inline-block;
+  transform-origin: 50% 50%;
+  animation: loading 1s linear infinite;
 }

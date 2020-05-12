@@ -11,7 +11,6 @@ Page({
         colorCss: "",
         categoryGoods: {},
         banner: [],
-        xsList:[1,2],
         msTime: '23:59',
         countdown: '',
         countdownFlag: true,
@@ -19,7 +18,14 @@ Page({
         hou:0,
         min:0,
         sec:0,
-        proList:[1,2,3,4],
+        newGoods:[],
+        skill:[],
+        page: 1,
+        size: 10,
+        loadmoreText: '正在加载更多数据',
+        nomoreText: '全部加载完成',
+        nomore: false,
+        totalPages: 1,
         "nav_icon_list": [{
                 "id": null,
                 "title": "我的足迹",
@@ -84,38 +90,29 @@ Page({
      */
     onLoad: function (options) {
         var access_token = wx.getStorageSync("access_token");
-        console.log('token:' + access_token);
-
-
-        // if (!access_token)
-        //     app.login();
-        console.log('login-token:' + access_token);
         this.loadData(options);
         
     },
-
     /**
      * 加载页面数据
      */
     loadData: function (options) {
         var that = this;
-        util.request(api.getCategoryGoods).then((res) => {
-            console.log("res", res);
-            that.setData({
-                categoryGoods: res.data
-            });
-        });
-        util.request(api.IndexUrlBanner).then(function (res) {
-            console.log("resbanner", res);
-            if (res.errno === 0) {
-                that.setData({
-                    banner: res.data.banner
-                });
-            }
-        });
-        this.countDownFun();
+        this.getIndexData();
+        //暂时首页不显示倒计时
+        //this.countDownFun();
     },
-
+    onPullDownRefresh() {
+        // 增加下拉刷新数据的功能
+        var self = this;
+        self.getIndexData();
+    },
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom(){
+        this.getGoodsList();
+    },
     /**
      * 生命周期函数--监听页面显示
      */
@@ -133,16 +130,29 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function (options) {
-        var page = this;
+        var that = this;
         var user_info = wx.getStorageSync("user_info");
-        return {
-            path: "/pages/index/index?user_id=" + user_info.id,
-            success: function (e) {
-                share_count++;
-                if (share_count == 1)
-                    app.shareSendCoupon(page);
-            }
-        };
+        var obj = {};
+        if(options.from == 'button'){
+            let index = options.target.dataset.index;
+            let goods = that.data.skill[index];
+            obj = {
+                title: goods.name,
+                imageUrl: goods.list_pic_url,
+                path: 'pages/goods/goods?id=' + goods.id + '&userId=' + user_info.id
+              }
+        }else{
+            obj = {
+                path: "/pages/index/index?user_id=" + user_info.id,
+                success: function (e) {
+                    share_count++;
+                    if (share_count == 1)
+                        app.shareSendCoupon(that);
+                }
+            };
+        }
+        
+        return obj;
     },
     onPageScroll(e) {
         let opciaty = e.scrollTop / 130;
@@ -164,6 +174,56 @@ Page({
             url: '/pages/search/search'
         });
     },
+    getIndexData: function () {
+        let that = this;
+        var data = new Object();
+        util.request(api.IndexUrlNewGoods).then(function (res) {
+          if (res.errno === 0) {
+            //that.setData(data);
+            that.setData({
+                newGoods: that.data.newGoods.concat(res.data.goodsList),
+                page: res.data.currentPage+1,
+                totalPages: res.data.totalPages
+              });
+          }
+        });
+        //秒杀产品
+        util.request(api.KillList,{page: 1,size:3}).then(function (res) {
+          if (res.errno === 0) {
+            data.skill = res.data.data;
+            that.setData(data); 
+          }
+        });
+
+        util.request(api.IndexUrlBanner).then(function (res) {
+            if (res.errno === 0) {
+                that.setData({
+                    banner: res.data.banner
+                });
+            }
+        });
+
+      },
+      getGoodsList: function () {
+        var that = this;
+    
+        if (that.data.totalPages <= that.data.page-1) {
+          that.setData({
+            nomore: true
+          })
+          return;
+        }
+    
+        util.request(api.IndexUrlNewGoods, {page: that.data.page, size: that.data.size})
+          .then(function (res) {
+                that.setData({
+                newGoods: that.data.newGoods.concat(res.data.goodsList),
+                page: res.data.currentPage+1,
+                totalPages: res.data.totalPages
+                });
+          });
+      },
+
     // 倒计时
   countDownFun:function(){
     var that=this;
