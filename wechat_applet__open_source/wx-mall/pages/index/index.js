@@ -181,7 +181,7 @@ Page({
           if (res.errno === 0) {
             //that.setData(data);
             that.setData({
-                newGoods: that.data.newGoods.concat(res.data.goodsList),
+                newGoods: res.data.goodsList,
                 page: res.data.currentPage+1,
                 totalPages: res.data.totalPages
               });

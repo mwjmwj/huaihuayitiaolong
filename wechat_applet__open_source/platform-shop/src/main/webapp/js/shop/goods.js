@@ -97,7 +97,11 @@ var vm = new Vue({
         },
         brands: [],//品牌
         macros: [],//商品单位
-        attributeCategories: []//属性类别
+        attributeCategories: [],//属性类别
+        startTimeOptions: {}, //开始日期设置
+        endTimeOptions: {}, //结束日期设置
+        starttime: '', //开始日期model
+        endtime: '' //结束日期model
     },
     methods: {
         query: function () {
@@ -410,7 +414,26 @@ var vm = new Vue({
         },
         eyeImage: function (e) {
             eyeImage($(e.target).attr('src'));
+        },
+        startTimeChange: function(e) { //设置开始时间
+            this.goods.startTime = e;
+            this.endTimeOptions = {
+                disabledDate: date => {
+                    let startTime = this.goods.startTime ? new Date(this.goods.startTime).valueOf() : '';
+                    return date && (date.valueOf() < startTime);
+                }
+            }
+        },
+        endTimeChange: function(e) { //设置结束时间
+            this.goods.endTime = e;
+            let endTime = this.goods.endTime ? new Date(this.goods.endTime).valueOf() - 1 * 24 * 24 * 60 * 1000  : '';
+            this.startTimeOptions = {
+                disabledDate: date => {
+                    return date && date.valueOf() > endTime;
+                }
+            }
         }
+
     },
     mounted() {
         this.uploadList = this.$refs.upload.fileList;

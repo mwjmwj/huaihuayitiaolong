@@ -107,11 +107,13 @@
                         </i-select>
                     </Form-item>
                     <Form-item label="活动开始时间" prop="startTime" v-if="goods.isSecKill==3||goods.isSecKill==2">
-		                <Date-picker v-model="goods.startTime" placeholder="活动开始时间"></Date-picker>
+		                <Date-picker v-model="goods.startTime" type="datetime" placeholder="活动开始时间" :options="startTimeOptions" @on-change="startTimeChange" ></Date-picker>
 		            </Form-item>
 		            <Form-item label="活动结束时间" prop="endTime" v-if="goods.isSecKill==3||goods.isSecKill==2" >
-		                <Date-picker v-model="goods.endTime" placeholder="活动结束时间"></Date-picker>
-		            </Form-item>
+		                <Date-picker v-model="goods.endTime"  type="datetime" placeholder="活动结束时间"  :options="endTimeOptions" @on-change="endTimeChange" ></Date-picker>
+                        <!-- 注释的是可以选择区间 -->
+                        <!--<Date-picker type="datetimerange" placement="bottom-end" placeholder="选择日期" style="width: 200px"></Date-picker>-->
+                    </Form-item>
 		            
 		            <Form-item label="成团时间(分钟)" prop="successTime"   v-if="goods.isSecKill==3" >
                         <Input-number :min="0" :step="1" v-model="goods.successTime" placeholder="成团时间 单位分钟"
