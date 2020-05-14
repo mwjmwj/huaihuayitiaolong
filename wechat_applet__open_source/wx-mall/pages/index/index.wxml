@@ -46,6 +46,9 @@
 			<!-- <view style="margin-left: 3%;margin-right: 3%;">
 			<text>12:00 | 14:00 | </text>
 			</view> -->
+			<view class="flashSale_mian_top">
+				限时秒杀
+			</view>
 			<view style="border-bottom: #d6d2d2 solid 1rpx;" wx:for="{{skill}}" wx:key="*this">
 				<!--商品展示-->
 				<navigator url="/pages/goods/goods?id={{item.id}}&type=2">

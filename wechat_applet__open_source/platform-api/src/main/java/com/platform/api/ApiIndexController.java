@@ -1,6 +1,7 @@
 package com.platform.api;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.platform.annotation.APPLoginUser;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.entity.*;
@@ -152,7 +153,7 @@ public class ApiIndexController extends ApiBaseAction {
             newCategoryList.add(newCategory);
         }
         resultObj.put("categoryList", newCategoryList);
-        
+
         //秒杀列表
         resultObj.put("killList", goodsService.queryKillList());
         return toResponsSuccess(resultObj);
@@ -165,22 +166,23 @@ public class ApiIndexController extends ApiBaseAction {
     @ApiOperation(value = "新商品信息")
     @IgnoreAuth
     @GetMapping(value = "newGoods")
-    public Object newGoods() {
-        Map<String, Object> resultObj = new HashMap<String, Object>();
+    public Object newGoods(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        //Map<String, Object> resultObj = new HashMap<String, Object>();
         //
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("is_new", 1);
         param.put("is_delete", 0);
         param.put("is_on_sale", 1);
 //        param.put("fields", "id, name, list_pic_url, retail_price");
-        PageHelper.startPage(0, 4, false);
+        PageHelper.startPage(page, size);
         List<GoodsVo> newGoods = goodsService.queryList(param);
-        resultObj.put("newGoodsList", newGoods);
+        ApiPageUtils goodsData = new ApiPageUtils(new PageInfo(newGoods));
+        //resultObj.put("newGoodsList", newGoods);
         //
-
-        return toResponsSuccess(resultObj);
+        goodsData.setGoodsList(newGoods);
+        return toResponsSuccess(goodsData);
     }
-    
+
     /**
      * app首页秒杀商品
      */
@@ -188,8 +190,8 @@ public class ApiIndexController extends ApiBaseAction {
     @IgnoreAuth
     @GetMapping(value = "secKill")
     public Object secKill() {
-    	Map<String, Object> resultObj = new HashMap<String, Object>();
-    	//秒杀列表
+        Map<String, Object> resultObj = new HashMap<String, Object>();
+        //秒杀列表
         resultObj.put("killList", goodsService.queryKillList());
         return toResponsSuccess(resultObj);
     }
@@ -216,7 +218,7 @@ public class ApiIndexController extends ApiBaseAction {
     @GetMapping(value = "newHotGoods")
     public Object newHotGoods(@APPLoginUser MlsUserEntity2 loginUser, @RequestParam(value = "page", defaultValue = "1") Integer page,
                               @RequestParam(value = "size", defaultValue = "5") Integer size) {
-    	  //查询列表数据
+        //查询列表数据
         Map params = new HashMap();
         params.put("is_delete", 0);
         params.put("is_on_sale", 1);
@@ -233,19 +235,19 @@ public class ApiIndexController extends ApiBaseAction {
         List<GoodsVo> goodsList = goodsService.queryFxList(query);
         int total = goodsService.queryFxTotal(query);
         for(GoodsVo vo : goodsList) {
-	    	vo.setDiscount(vo.getRetail_price().multiply(new BigDecimal("10")).divide(vo.getMarket_price(), 1, BigDecimal.ROUND_HALF_UP).toString());
-	    	vo.setUser_brokerage_price(vo.getRetail_price().multiply(new BigDecimal(vo.getBrokerage_percent())).multiply(new BigDecimal(loginUser.getFx()).divide(new BigDecimal("10000"))).setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+            vo.setDiscount(vo.getRetail_price().multiply(new BigDecimal("10")).divide(vo.getMarket_price(), 1, BigDecimal.ROUND_HALF_UP).toString());
+            vo.setUser_brokerage_price(vo.getRetail_price().multiply(new BigDecimal(vo.getBrokerage_percent())).multiply(new BigDecimal(loginUser.getFx()).divide(new BigDecimal("10000"))).setScale(2, BigDecimal.ROUND_HALF_UP).toString());
         }
         ApiPageUtils pageUtil = new ApiPageUtils(goodsList, total, query.getLimit(), query.getPage());
         return toResponsSuccess(pageUtil);
     }
-    
+
     @ApiOperation(value = "服务性商品信息")
     @IgnoreAuth
     @GetMapping(value = "serviceGoods")
     public Object serviceGoods(@RequestParam(value = "page", defaultValue = "1") Integer page,
-            @RequestParam(value = "size", defaultValue = "10") Integer size) {
-        
+                               @RequestParam(value = "size", defaultValue = "10") Integer size) {
+
         Map params = new HashMap();
         params.put("is_delete", 0);
         params.put("is_on_sale", 1);
@@ -372,12 +374,12 @@ public class ApiIndexController extends ApiBaseAction {
 
         return toResponsSuccess(resultObj);
     }
-    
+
     @ApiOperation(value = "idcardCheck")
     @IgnoreAuth
     @GetMapping(value = "idcardCheck")
     public Object idcardCheck(String idcard, String realname) {
-    	Long userId = this.getUserId();
+        Long userId = this.getUserId();
         Map<String, Object> resultObj = new HashMap<String, Object>();
         resultObj = lifeServiceSer.idcardCheck(idcard, realname, userId);
         return toResponsObject(Integer.parseInt(resultObj.get("errno").toString()), resultObj.get("errmsg").toString(), null);

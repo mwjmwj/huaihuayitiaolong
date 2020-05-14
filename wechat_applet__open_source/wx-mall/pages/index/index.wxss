@@ -555,6 +555,18 @@
   right: 20rpx;
 }
 
+.flashSale_mian_top{
+  position: absolute;
+  top: 5rpx;
+  left: 20%;
+  right: 20%;
+  font-size: xx-large;
+  font-weight: bold;
+  font-family: '宋体';
+  text-align: center; /*文字水平居中*/
+  color: white;
+}
+
 .flashSale_show_img{
   position: relative;
   margin: 3% 3% 0 3%;
@@ -613,17 +625,16 @@
   flex-direction: row;
   width: 60%;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .flashSale-bottoom-qf navigator{
-  margin-left: 3%;
-  margin-right: 3%;
   padding: 1%;
 }
 
 .flashSale-bottoom-qf navigator:first-child{
   background-color: rgb(229, 43, 37);
-  width: 500rpx;
+  width: 50%;
   border-radius: 25rpx;
   text-align: center;
   color: white;
@@ -636,7 +647,9 @@
   width: 52.803rpx; 
   background: url(http://webcharpic.xfshequ.com/icon/icon_fx.png) 0 0 no-repeat;
   background-size: 52.803rpx; 
-  margin-left: 5%;
+  right: 5rpx;
+  margin-right: 5rpx;
+  margin-left: 10%;
 }
 
 .bottom-gd{
