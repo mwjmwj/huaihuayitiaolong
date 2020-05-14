@@ -100,6 +100,10 @@
                     </httpConnector>
                     <scanIntervalSeconds>1</scanIntervalSeconds>
                 </configuration>
+<!--                <webAppConfig>-->
+<!--                    <allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>-->
+
+<!--                </webAppConfig>-->
             </plugin>
 
         </plugins>

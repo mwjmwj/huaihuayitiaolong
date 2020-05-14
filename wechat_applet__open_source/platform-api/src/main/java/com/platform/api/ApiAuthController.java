@@ -1,9 +1,6 @@
 package com.platform.api;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -203,4 +200,69 @@ public class ApiAuthController extends ApiBaseAction {
         
         return toResponsSuccess(null);
     }
+
+    public static void xuanzesort(int[] arr,boolean zhengxu){
+        int tmp = 0;
+        for (int i = 0; i < arr.length -1; i++) {
+            for (int j = i; j < arr.length; j++) {
+                if(arr[j]>arr[i]){
+                    if(!zhengxu){
+                        tmp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = tmp;
+                    }
+                }
+                if(arr[j]<arr[i]){
+                    if(zhengxu){
+                        tmp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = tmp;
+                    }
+                }
+            }
+        }
+
+        System.out.println(Arrays.toString(arr));
+
+    }
+    public static void maopaosort(int[] arr,boolean zhengxu){
+        int tmp = 0;
+        for (int i = 0; i <arr.length ; i++) {
+            for (int j = 0; j < arr.length-i; j++) {
+                if(j+1 >= arr.length){
+                    continue;
+                }
+
+                if(arr[j]>arr[j+1]){
+                    if(!zhengxu){
+                        tmp = arr[j+1];
+                        arr[j+1] = arr[j];
+                        arr[j] = tmp;
+                    }
+                }
+                if(arr[j]<arr[j+1]){
+                    if(zhengxu){
+                        tmp = arr[j+1];
+                        arr[j+1] = arr[j];
+                        arr[j] = tmp;
+                    }
+                }
+
+            }
+        }
+        System.out.println(Arrays.toString(arr)); 
+
+    }
+
+    public static void main(String[] args) {
+
+        int[] a =  {1,2,3,5,4};
+        xuanzesort(a,false);
+        xuanzesort(a,true);
+
+        maopaosort(a,false);
+        maopaosort(a,true);
+    }
+
+
 }

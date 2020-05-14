@@ -32,7 +32,8 @@
     </resultMap>
 
     <select id="queryObject" resultMap="userMap">
-		select * from nideshop_user where id = #{value}
+		select * from \
+        where id = #{value}
 	</select>
 
     <select id="queryByOpenId" resultMap="userMap">

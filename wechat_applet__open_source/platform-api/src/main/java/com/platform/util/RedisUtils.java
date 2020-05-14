@@ -23,8 +23,8 @@ public class RedisUtils {
     private static String password = null;
 
     static {
-    	
-    	
+
+
     	Properties properties = new Properties();
     	// 使用ClassLoader加载properties配置文件生成对应的输入流
     	InputStream in = RedisUtils.class.getClassLoader().getResourceAsStream("/j2cache.properties");
@@ -35,14 +35,13 @@ public class RedisUtils {
 			e.printStackTrace();
 		}
     	//获取key对应的value值
-    	String adds = properties.getProperty("redis.adds");
-    	int port = Integer.parseInt(properties.getProperty("redis.port"));
+    	String adds = properties.getProperty("redis.hosts");
     	password = properties.getProperty("redis.password");
 
         config = new JedisPoolConfig();
         config.setMaxIdle(100);
         config.setMaxIdle(10);
-        jedisPool = new JedisPool(config, adds, port);
+        jedisPool = new JedisPool(config, adds.split(":")[0], Integer.parseInt(adds.split(":")[1]));
     }
 
     /**
