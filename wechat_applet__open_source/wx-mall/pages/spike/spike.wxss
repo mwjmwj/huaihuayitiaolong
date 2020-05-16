@@ -1,5 +1,4 @@
 /* pages/spike/spike.wxss */
-
 	.content .top{
 		position: fixed;
 		top: 0;
@@ -50,8 +49,9 @@
 		width: 750rpx;
 		height: 300rpx;
 		background: #FFFFFF;
-		margin-top: 6rpx;
+		margin-top: 10rpx;
 		padding: 20rpx 0;
+		border-bottom: #e3e3e3 solid 1px;
 	}
 	.goods .goodinfo .cont{
 		width: 710rpx;
@@ -76,7 +76,7 @@
 		height: 100%;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: space-between;
 		align-items: flex-start;
 	}
 	.goods .goodinfo .cont .proinfo .m{
@@ -86,11 +86,40 @@
 	.tit{
 		font-size: 16px;
 		color: #000000;
+		height: auto;
+		text-overflow: -o-ellipsis-lastline;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		-webkit-box-orient: vertical;
 	}
 	.des{
 		color: #999;
 		font-size: 13px;
 	}
+
+	.priceInfo{
+		display: flex;
+		justify-content: space-between;
+		width: 90%;
+		margin-left: 20rpx;
+		margin-right: 10rpx;
+	}
+
+	.priceInfo_jg{
+		display: flex;
+		flex-direction: column;
+
+	}
+
+	.priceInfo_jg  .line{
+		text-decoration:line-through;
+		color: #999;
+		margin-left: 20rpx;
+	}
+
 	.price{
 		font-size: 18px;
 		color: #fd585c;
